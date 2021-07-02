@@ -3,9 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-
 const { auth } = require("./middleware/auth");
-
 const { User } = require("./models/User");
 const mongoose = require("mongoose");
 mongoose
@@ -61,6 +59,7 @@ app.get("/api/users/auth", auth, (req, res) => {
   res.json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
     email: req.user.email,
     name: req.user.name,
     lastname: req.user.lastname,
